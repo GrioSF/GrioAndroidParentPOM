@@ -42,7 +42,7 @@
         <sign.keystore>${main.basedir}/debug.keystore</sign.keystore>
 
         <!-- library versions -->
-        <junit.version>4.11</junit.version>
+        <junit.version>3.8.2</junit.version>
         <actionbarsherlock.version>4.2.0</actionbarsherlock.version>
         <holoeverywhere.version>1.4.2</holoeverywhere.version>
         <facebook.version>3.0.1</facebook.version>
@@ -203,6 +203,50 @@
                 <artifactId>dagger-compiler</artifactId>
                 <version>${dagger.version}</version>
             </dependency>
+            
+            <!-- ActionBarSherlock -->
+            <dependency>
+               <groupId>com.actionbarsherlock</groupId>
+               <artifactId>actionbarsherlock</artifactId>
+               <version>${actionbarsherlock.version}</version>
+               <type>apklib</type>
+            </dependency>
+
+            <dependency>
+               <groupId>com.actionbarsherlock</groupId>
+               <artifactId>actionbarsherlock</artifactId>
+               <version>${actionbarsherlock.version}</version>
+               <type>pom</type>
+            </dependency>
+
+            <!-- HoloEverywhere -->          
+            <dependency>
+               <groupId>org.holoeverywhere</groupId>
+               <artifactId>library</artifactId>
+               <version>${holoeverywhere.version}</version>
+               <type>apklib</type>
+            </dependency>
+
+            <dependency>
+               <groupId>org.holoeverywhere</groupId>
+               <artifactId>library</artifactId>
+               <version>${holoeverywhere.version}</version>
+               <type>pom</type>
+            </dependency>
+            
+            <!-- Facebook SDK -->
+            <dependency>
+                <groupId>com.facebook</groupId>
+                <artifactId>facebook-android-sdk</artifactId>
+                <version>${facebook.version}</version>
+                <type>apklib</type>
+            </dependency>
+            <dependency>
+                <groupId>com.facebook</groupId>
+                <artifactId>facebook-android-sdk</artifactId>
+                <version>${facebook.version}</version>
+                <type>pom</type>
+            </dependency>
 
             <!-- Test dependencies -->
             <dependency>
@@ -210,12 +254,12 @@
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
                 <scope>test</scope>
-                <!--<exclusions>
+                <exclusions>
                     <exclusion>
                         <groupId>org.hamcrest</groupId>
                         <artifactId>hamcrest-core</artifactId>
                     </exclusion>
-                </exclusions>-->
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>com.jayway.android.robotium</groupId>
