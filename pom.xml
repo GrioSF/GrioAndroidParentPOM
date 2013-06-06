@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>android-archetype-project</artifactId>
+        <groupId>de.akquinet.android.archetypes</groupId>
+        <version>1.0.9</version>
+    </parent>
+
+    <groupId>com.grio.android</groupId>
+    <artifactId>grio-android-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>Grio Android Parent POM</name>
+
+    <description>Grio Android Parent POM</description>
+    <url>https://www.</url>
+    <inceptionYear>2013</inceptionYear>
+    <organization>
+        <name>Boom</name>
+        <url>http://grio.com</url>
+    </organization>
+    <issueManagement>
+        <system>Trello</system>
+        <url>https://trello.com/board/grio-android-tools/519d47eb8f10b7a15b002366</url>
+    </issueManagement>
+    <scm>
+        <url>https://github.com/GrioSF/GrioAndroidParentPOM.git</url>
+    </scm>
+
+    <properties>
+        <!-- directory locations -->
+        <main.basedir>${project.basedir}</main.basedir>
+        <!-- FIXME: android-test missing on our nexus for api 17 -->
+        <platform.version>4.1.1.4</platform.version>
+        <platform.level>16</platform.level>
+        <jvm.version>1.6</jvm.version>
+        <android.support-v4.library.version>r13</android.support-v4.library.version>
+
+        <!-- keystore -->
+        <sign.keystore>${main.basedir}/debug.keystore</sign.keystore>
+
+        <!-- library versions -->
+        <junit.version>4.11</junit.version>
+        <actionbarsherlock.version>4.2.0</actionbarsherlock.version>
+        <holoeverywhere.version>1.4.2</holoeverywhere.version>
+        <facebook.version>3.0.1</facebook.version>
+        <nineoldandroids.version>2.4.0</nineoldandroids.version>
+        <otto.version>1.3.3</otto.version>
+        <dagger.version>1.0.1</dagger.version>
+
+        <gson.version>2.2.4</gson.version>
+        <libphonenumber.version>5.3</libphonenumber.version>
+        <robospice.version>1.4.0</robospice.version>
+        <spring.android.version>1.0.1.RELEASE</spring.android.version>
+        <spring.social.core.version>1.0.2.PATCHED</spring.social.core.version>
+        <spring.crypto.version>3.1.3.RELEASE</spring.crypto.version>
+
+        <!-- plugin versions -->
+        <android.maven.plugin.version>3.6.0</android.maven.plugin.version>
+        <maven.compiler.plugin.version>3.1</maven.compiler.plugin.version>
+        <maven.enforcer.plugin.version>1.2</maven.enforcer.plugin.version>
+        <maven.release.plugin.version>2.4</maven.release.plugin.version>
+        <maven.jarsigner.plugin.version>1.2</maven.jarsigner.plugin.version>
+        <maven.resources.plugin.version>2.6</maven.resources.plugin.version>
+        <maven.javadoc.plugin.version>2.9</maven.javadoc.plugin.version>
+        <maven.invoker.plugin.version>1.8</maven.invoker.plugin.version>
+        <maven.source.plugin.version>2.2.1</maven.source.plugin.version>
+        <maven.dependency.plugin.version>2.6</maven.dependency.plugin.version>
+        <maven.clean.plugin.version>2.5</maven.clean.plugin.version>
+        <maven.surefire.plugin.version>2.13</maven.surefire.plugin.version>
+        <build.helper.maven.plugin.version>1.8</build.helper.maven.plugin.version>
+        <maven.jar.plugin.version>2.4</maven.jar.plugin.version>
+        <maven.gpg.plugin.version>1.4</maven.gpg.plugin.version>
+        <maven.deploy.plugin.version>2.7</maven.deploy.plugin.version>
+        <maven.install.plugin.version>2.4</maven.install.plugin.version>
+        <maven.site.plugin.version>3.2</maven.site.plugin.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--  Google Apis -->
+            <dependency>
+                <groupId>com.google.android</groupId>
+                <artifactId>android</artifactId>
+                <version>${platform.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.google.android</groupId>
+                <artifactId>annotations</artifactId>
+                <version>${platform.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.google.android</groupId>
+                <artifactId>android-test</artifactId>
+                <version>${platform.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.google.android</groupId>
+                <artifactId>support-v4</artifactId>
+                <version>${android.support-v4.library.version}</version>
+            </dependency>
+
+            <!-- Spring -->
+            <dependency>
+                <groupId>org.springframework.android</groupId>
+                <artifactId>spring-android-auth</artifactId>
+                <version>${spring.android.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-crypto</artifactId>
+                <version>${spring.crypto.version}</version>
+                <!-- this scope has to be set to 'compile' instead of 'runtime' to allow the
+                      maven-android-plugin proguard to obfuscate this jar. Revert back to 'runtime'
+                      when this is fixed: https://code.google.com/p/maven-android-plugin/issues/detail?id=365  -->
+                <scope>compile</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-core</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.social</groupId>
+                <artifactId>spring-social-core</artifactId>
+                <version>${spring.social.core.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-web</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- Google Gson -->
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${gson.version}</version>
+            </dependency>
+
+            <!-- libphonenumber -->
+            <dependency>
+                <groupId>com.googlecode.libphonenumber</groupId>
+                <artifactId>libphonenumber</artifactId>
+                <version>${libphonenumber.version}</version>
+            </dependency>
+
+            <!--  RoboSpice -->
+            <dependency>
+                <groupId>com.octo.android.robospice</groupId>
+                <artifactId>robospice</artifactId>
+                <version>${robospice.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.octo.android.robospice</groupId>
+                <artifactId>robospice-spring-android</artifactId>
+                <version>${robospice.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.octo.android.robospice</groupId>
+                <artifactId>robospice-cache</artifactId>
+                <version>${robospice.version}</version>
+            </dependency>
+
+            <!-- GCM -->
+            <dependency>
+                <groupId>com.google.android</groupId>
+                <artifactId>gcm-client</artifactId>
+                <version>3</version>
+                <type>jar</type>
+            </dependency>
+
+            <!-- NineOldAndroids -->
+            <dependency>
+                <groupId>com.nineoldandroids</groupId>
+                <artifactId>library</artifactId>
+                <version>${nineoldandroids.version}</version>
+                <type>jar</type>
+            </dependency>
+
+            <!-- Otto -->
+            <dependency>
+                <groupId>com.squareup</groupId>
+                <artifactId>otto</artifactId>
+                <version>${otto.version}</version>
+            </dependency>
+
+            <!-- Dagger -->
+            <dependency>
+                <groupId>com.squareup.dagger</groupId>
+                <artifactId>dagger</artifactId>
+                <version>${dagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.squareup.dagger</groupId>
+                <artifactId>dagger-compiler</artifactId>
+                <version>${dagger.version}</version>
+            </dependency>
+
+            <!-- Test dependencies -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+                <!--<exclusions>
+                    <exclusion>
+                        <groupId>org.hamcrest</groupId>
+                        <artifactId>hamcrest-core</artifactId>
+                    </exclusion>
+                </exclusions>-->
+            </dependency>
+            <dependency>
+                <groupId>com.jayway.android.robotium</groupId>
+                <artifactId>robotium-solo</artifactId>
+                <version>4.1</version>
+            </dependency>
+            
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                    <artifactId>android-maven-plugin</artifactId>
+                    <version>${android.maven.plugin.version}</version>
+                    <inherited>true</inherited>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <release>false</release>
+                        <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
+                        <assetsDirectory>${project.basedir}/assets</assetsDirectory>
+                        <resourceDirectory>${project.basedir}/res</resourceDirectory>
+                        <nativeLibrariesDirectory>${project.basedir}/src/main/native</nativeLibrariesDirectory>
+                        <extractDuplicates>false</extractDuplicates>
+                        <sdk>
+                            <platform>${platform.level}</platform>
+                            <path>${env.ANDROID_HOME}</path>
+                        </sdk>
+                        <undeployBeforeDeploy>true</undeployBeforeDeploy>
+                        <lint>
+                            <skip>true</skip>
+                        </lint>
+                        <emma>
+                            <enable>false</enable>
+                        </emma>
+                        <proguard>
+                            <skip>true</skip>
+                        </proguard>
+                        <test>
+                            <skip>true</skip>
+                        </test>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven.compiler.plugin.version}</version>
+                    <inherited>true</inherited>
+                    <configuration>
+                        <source>${jvm.version}</source>
+                        <target>${jvm.version}</target>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>${maven.enforcer.plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>${maven.release.plugin.version}</version>
+                    <configuration>
+                        <autoVersionSubmodules>true</autoVersionSubmodules>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jarsigner-plugin</artifactId>
+                    <version>${maven.jarsigner.plugin.version}</version>
+                    <inherited>true</inherited>
+                    <configuration>
+                        <removeExistingSignatures>true</removeExistingSignatures>
+                        <archiveDirectory/>
+                        <archive>${project.build.directory}/${project.build.finalName}.${project.packaging}</archive>
+                        <verbose>false</verbose>
+                        <certs>false</certs>
+                        <keystore>${sign.keystore}</keystore>
+                        <alias>${sign.alias}</alias>
+                        <storepass>${sign.storepass}</storepass>
+                        <keypass>${sign.keypass}</keypass>
+                        <arguments>
+                            <argument>-sigalg</argument>
+                            <argument>SHA1withRSA</argument>
+                            <argument>-digestalg</argument>
+                            <argument>SHA1</argument>
+                        </arguments>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven.resources.plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${maven.resources.plugin.version}</version>
+                    <configuration>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-invoker-plugin</artifactId>
+                    <version>${maven.invoker.plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${maven.source.plugin.version}</version>
+                    <configuration>
+                        <skipSource>true</skipSource>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>${maven.dependency.plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>${maven.clean.plugin.version}</version>
+                    <configuration>
+                        <verbose>true</verbose>
+                        <filesets>
+                            <fileset>
+                                <directory>${project.basedir}</directory>
+                                <includes>
+                                    <include>bin/**</include>
+                                    <include>gen/**</include>
+                                </includes>
+                            </fileset>
+                        </filesets>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven.surefire.plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>${build.helper.maven.plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>1.4</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven.jar.plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${maven.deploy.plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${maven.install.plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>${maven.site.plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+
+                                <!-- to eliminate maven-enforcer-plugin (goal "enforce") is ignored
+                                    by m2e warnings http://stackoverflow.com/questions/13040788/how-to-elimate-the-maven-enforcer-plugin-goal-enforce-is-ignored-by-m2e-wa -->
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.apache.maven.plugins</groupId>
+                                        <artifactId>maven-enforcer-plugin</artifactId>
+                                        <versionRange>[1.0.0,)</versionRange>
+                                        <goals>
+                                            <goal>enforce</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore/>
+                                    </action>
+                                </pluginExecution>
+
+                                <!-- to eliminate maven-invoker-plugin (goal "install") is ignored by
+                                    m2e warnings -->
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.apache.maven.plugins</groupId>
+                                        <artifactId>maven-invoker-plugin</artifactId>
+                                        <versionRange>[1.8,)</versionRange>
+                                        <goals>
+                                            <goal>install</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore/>
+                                    </action>
+                                </pluginExecution>
+
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <prerequisites>
+        <maven>3.0.3</maven>
+    </prerequisites>
+
+    <repositories>
+        
+        <repository>
+            <id>grio-android</id>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <layout>default</layout>
+            <url>http://nexus.grio.com/nexus/content/repositories/android</url>
+        </repository>
+
+        <repository>
+            <id>grio-snapshots</id>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <layout>default</layout>
+            <url>http://nexus.grio.com/nexus/content/repositories/snapshots</url>
+        </repository>
+
+        <repository>
+            <id>grio-thirdparty-snapshots</id>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <layout>default</layout>
+            <url>http://nexus.grio.com/nexus/content/repositories/thirdparty-snapshots</url>
+        </repository>
+
+        <repository>
+            <id>grio-thirdparty</id>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <layout>default</layout>
+            <url>http://nexus.grio.com/nexus/content/repositories/thirdparty</url>
+        </repository>
+
+        <repository>
+            <id>grio-releases</id>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <layout>default</layout>
+            <url>http://nexus.grio.com/nexus/content/repositories/releases</url>
+        </repository>
+        
+        <repository>
+            <id>springsource-repo</id>
+            <name>SpringSource Repository</name>
+            <url>http://repo.springsource.org/release</url>
+        </repository>
+
+    </repositories>
+
+    <distributionManagement>
+    
+        <repository>
+          <uniqueVersion>false</uniqueVersion>
+          <id>grio-nexus</id>
+          <name>Grio Releases</name>
+          <url>http://nexus.grio.com/nexus/content/repositories/releases</url>
+          <layout>default</layout>
+        </repository>
+        
+        <snapshotRepository>
+          <uniqueVersion>true</uniqueVersion>
+          <id>grio-nexus</id>
+          <name>Grio Snapshots</name>
+          <url>http://nexus.grio.com/nexus/content/repositories/snapshots</url>
+          <layout>default</layout>
+        </snapshotRepository>
+    
+    </distributionManagement>
+
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-enforcer-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>enforce-signing-properties</id>
+                                <goals>
+                                    <goal>enforce</goal>
+                                </goals>
+                                <configuration>
+                                    <rules>
+                                        <requireProperty>
+                                            <property>sign.keystore</property>
+                                            <message>The 'sign.keystore' property is missing. It must contain the path
+                                                to the
+                                                keystore used to sign the application.
+                                            </message>
+                                        </requireProperty>
+                                        <requireFilesExist>
+                                            <files>
+                                                <file>${sign.keystore}</file>
+                                            </files>
+                                            <message>The 'sign.keystore' property does not point to a file. It must
+                                                contain the
+                                                path to the keystore used to sign the application.
+                                            </message>
+                                        </requireFilesExist>
+                                        <requireProperty>
+                                            <property>sign.alias</property>
+                                            <message>The 'sign.alias' property is missing. It must contain the key alias
+                                                used to
+                                                sign the application.
+                                            </message>
+                                        </requireProperty>
+                                        <requireProperty>
+                                            <property>sign.storepass</property>
+                                            <message>The 'sign.storepass' property is missing. It must contain the
+                                                password of
+                                                the keystore used to sign the application.
+                                            </message>
+                                        </requireProperty>
+                                        <requireProperty>
+                                            <property>sign.keypass</property>
+                                            <message>The 'sign.keypass' property is missing. It must contain the
+                                                password of the
+                                                key used to sign the application.
+                                            </message>
+                                        </requireProperty>
+                                    </rules>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>linux</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                </os>
+            </activation>
+            <properties>
+                <rt.jar.path>${java.home}/jre/lib/rt.jar</rt.jar.path>
+                <jsse.jar.path>${java.home}/jre/lib/jsse.jar</jsse.jar.path>
+            </properties>
+        </profile>
+
+        <!-- mac profile has to be after unix since running on mac will trigger both -->
+        <profile>
+            <id>mac</id>
+            <activation>
+                <os>
+                    <family>mac</family>
+                </os>
+            </activation>
+            <properties>
+                <!-- absolute path -->
+                <!--<rt.jar.path>/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Classes/classes.jar</rt.jar.path> -->
+                <!-- or with JAVA_HOME /System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Home/ -->
+                <rt.jar.path>${java.home}/../Classes/classes.jar</rt.jar.path>
+                <jsse.jar.path>${java.home}/../Classes/jsse.jar</jsse.jar.path>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>windows</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                </os>
+            </activation>
+            <properties>
+                <rt.jar.path>${java.home}/jre/lib/rt.jar</rt.jar.path>
+                <jsse.jar.path>${java.home}/jre/lib/jsse.jar</jsse.jar.path>
+            </properties>
+        </profile>
+
+    </profiles>
+</project>
