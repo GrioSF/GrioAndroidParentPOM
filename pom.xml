@@ -15,10 +15,10 @@
     <name>Grio Android Parent POM</name>
 
     <description>Grio Android Parent POM</description>
-    <url>https://www.</url>
+    <url>https://github.com/GrioSF/GrioAndroidParentPOM</url>
     <inceptionYear>2013</inceptionYear>
     <organization>
-        <name>Boom</name>
+        <name>Grio</name>
         <url>http://grio.com</url>
     </organization>
     <issueManagement>
@@ -32,6 +32,8 @@
     <properties>
         <!-- directory locations -->
         <main.basedir>${project.basedir}</main.basedir>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
         <!-- FIXME: android-test missing on our nexus for api 17 -->
         <platform.version>4.1.1.4</platform.version>
         <platform.level>16</platform.level>
@@ -76,6 +78,7 @@
         <maven.deploy.plugin.version>2.7</maven.deploy.plugin.version>
         <maven.install.plugin.version>2.4</maven.install.plugin.version>
         <maven.site.plugin.version>3.2</maven.site.plugin.version>
+        <maven.eclipse.plugin.version>2.9</maven.eclipse.plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -211,7 +214,6 @@
                <version>${actionbarsherlock.version}</version>
                <type>apklib</type>
             </dependency>
-
             <dependency>
                <groupId>com.actionbarsherlock</groupId>
                <artifactId>actionbarsherlock</artifactId>
@@ -226,7 +228,6 @@
                <version>${holoeverywhere.version}</version>
                <type>apklib</type>
             </dependency>
-
             <dependency>
                <groupId>org.holoeverywhere</groupId>
                <artifactId>library</artifactId>
@@ -450,6 +451,19 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
                     <version>${maven.site.plugin.version}</version>
+                </plugin>
+                
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-eclipse-plugin</artifactId>
+                    <version>${maven.eclipse.plugin.version}</version>
+                    <configuration>
+                        <additionalConfig>
+                            <file>
+                                <name>.settings</name>
+                            </file>
+                        </additionalConfig>
+                    </configuration>
                 </plugin>
 
                 <plugin>
