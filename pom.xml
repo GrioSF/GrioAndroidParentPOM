@@ -9,7 +9,7 @@
     </parent>
 
     <groupId>com.grio.android</groupId>
-    <artifactId>grio-android-parent</artifactId>
+    <artifactId>parent</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Grio Android Parent POM</name>
@@ -79,6 +79,7 @@
         <maven.install.plugin.version>2.4</maven.install.plugin.version>
         <maven.site.plugin.version>3.2</maven.site.plugin.version>
         <maven.eclipse.plugin.version>2.9</maven.eclipse.plugin.version>
+        <maven.idea.plugin.version>2.2</maven.idea.plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -465,6 +466,12 @@
                         </additionalConfig>
                     </configuration>
                 </plugin>
+                
+                <plugin>
+                     <groupId>org.apache.maven.plugins</groupId>
+                     <artifactId>maven-idea-plugin</artifactId>
+                     <version>${maven.idea.plugin.version}</version>
+                </plugin>                
 
                 <plugin>
                     <groupId>org.eclipse.m2e</groupId>
