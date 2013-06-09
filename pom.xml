@@ -5,21 +5,58 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.grio.android</groupId>
     <artifactId>parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Grio Android Parent POM</name>
+    <version>1.0-SNAPSHOT</version>
 
     <description>Grio Android Parent POM</description>
     <url>https://github.com/GrioSF/GrioAndroidParentPOM</url>
-    <inceptionYear>2013</inceptionYear>
-    <organization>
-        <name>Grio</name>
-        <url>http://grio.com</url>
-    </organization>
+    <prerequisites>
+        <maven>[3.0.3,)</maven>
+    </prerequisites>
+
     <issueManagement>
         <system>Trello</system>
         <url>https://trello.com/board/grio-android-tools/519d47eb8f10b7a15b002366</url>
     </issueManagement>
+
+    <inceptionYear>2013</inceptionYear>
+
+    <mailingLists>
+      <mailingList>
+        <name>Grio Android Tools</name>
+        <post>androidtools@grio.com</post>
+      </mailingList>
+    </mailingLists>
+    
+    <developers>
+        <developer>
+            <id>lhilden</id>
+            <name>Louis C. Hilden</name>
+            <email>lhilden@grio.com</email>
+            <organization>Grio</organization>
+            <organizationUrl>www.grio.com</organizationUrl>
+            <roles>
+                <role>some dude</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>ryands</id>
+            <name>Ryan Shultz</name>
+            <email>rschultz@grio.com</email>
+            <organization>Grio</organization>
+            <organizationUrl>www.grio.com</organizationUrl>
+            <roles>
+                <role>some other dude</role>
+            </roles>
+        </developer>
+    </developers>    
+    
+    <organization>
+        <name>Grio</name>
+        <url>http://grio.com</url>
+    </organization>
+
     <scm>
         <url>https://github.com/GrioSF/GrioAndroidParentPOM.git</url>
     </scm>
@@ -213,12 +250,14 @@
                <version>${actionbarsherlock.version}</version>
                <type>apklib</type>
             </dependency>
+            <!--
             <dependency>
                <groupId>com.actionbarsherlock</groupId>
                <artifactId>actionbarsherlock</artifactId>
                <version>${actionbarsherlock.version}</version>
                <type>pom</type>
             </dependency>
+            -->
 
             <!-- HoloEverywhere -->          
             <dependency>
@@ -227,12 +266,14 @@
                <version>${holoeverywhere.version}</version>
                <type>apklib</type>
             </dependency>
+            <!--
             <dependency>
                <groupId>org.holoeverywhere</groupId>
                <artifactId>library</artifactId>
                <version>${holoeverywhere.version}</version>
                <type>pom</type>
             </dependency>
+            -->
             
             <!-- Facebook SDK -->
             <dependency>
@@ -241,12 +282,14 @@
                 <version>${facebook.version}</version>
                 <type>apklib</type>
             </dependency>
+            <!--
             <dependency>
                 <groupId>com.facebook</groupId>
                 <artifactId>facebook-android-sdk</artifactId>
                 <version>${facebook.version}</version>
                 <type>pom</type>
             </dependency>
+            -->
 
             <!-- Test dependencies -->
             <dependency>
@@ -518,10 +561,6 @@
             </plugins>
         </pluginManagement>
     </build>
-
-    <prerequisites>
-        <maven>3.0.3</maven>
-    </prerequisites>
 
     <repositories>
         
