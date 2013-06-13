@@ -43,8 +43,8 @@
 
         <!-- library versions -->
         <junit.version>3.8.2</junit.version>
-        <actionbarsherlock.version>4.2.0</actionbarsherlock.version>
-        <holoeverywhere.version>1.4.2</holoeverywhere.version>
+        <actionbarsherlock.version>4.3.1</actionbarsherlock.version>
+        <holoeverywhere.version>1.6.1</holoeverywhere.version>
         <facebook.version>3.0.1</facebook.version>
         <nineoldandroids.version>2.4.0</nineoldandroids.version>
         <otto.version>1.3.3</otto.version>
