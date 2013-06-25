@@ -97,6 +97,7 @@
         <!-- plugin versions -->
         <android.maven.plugin.version>3.6.0</android.maven.plugin.version>
         <build.helper.maven.plugin.version>1.8</build.helper.maven.plugin.version>
+        <maven.checkstyle.plugin.version>2.10</maven.checkstyle.plugin.version>
         <maven.clean.plugin.version>2.5</maven.clean.plugin.version>
         <maven.compiler.plugin.version>3.1</maven.compiler.plugin.version>
         <maven.dependency.plugin.version>2.6</maven.dependency.plugin.version>
@@ -110,6 +111,7 @@
         <maven.jar.plugin.version>2.4</maven.jar.plugin.version>
         <maven.jarsigner.plugin.version>1.2</maven.jarsigner.plugin.version>
         <maven.javadoc.plugin.version>2.9</maven.javadoc.plugin.version>
+        <maven.jxr.plugin.version>2.3</maven.jxr.plugin.version>
         <maven.release.plugin.version>2.4</maven.release.plugin.version>
         <maven.resources.plugin.version>2.6</maven.resources.plugin.version>
         <maven.site.plugin.version>3.2</maven.site.plugin.version>
@@ -512,6 +514,18 @@
                      <artifactId>maven-idea-plugin</artifactId>
                      <version>${maven.idea.plugin.version}</version>
                 </plugin>                
+                    
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jxr-plugin</artifactId>
+                    <version>${maven.jxr.plugin.version}</version>
+                </plugin>
+                                        
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${maven.checkstyle.plugin.version}</version>
+                </plugin>
 
                 <plugin>
                     <groupId>org.eclipse.m2e</groupId>
