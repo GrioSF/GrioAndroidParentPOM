@@ -66,8 +66,8 @@
         <main.basedir>${project.basedir}</main.basedir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <platform.version>4.1.1.4</platform.version>
-        <platform.level>16</platform.level>
+        <platform.version>17</platform.version>
+        <platform.level>17</platform.level>
         
         <!-- JVM 1.6 is the default because there are some signing issues with 1.7 that haven't been resolved yet-->
         <jvm.version>1.6</jvm.version>
@@ -131,12 +131,6 @@
             <dependency>
                 <groupId>com.google.android</groupId>
                 <artifactId>annotations</artifactId>
-                <version>${platform.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.google.android</groupId>
-                <artifactId>android-test</artifactId>
                 <version>${platform.version}</version>
                 <scope>provided</scope>
             </dependency>
