@@ -7,7 +7,7 @@
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
     <name>Grio Android Parent POM</name>
-    <version>1.0</version>
+    <version>1.0.1</version>
 
     <description>Grio Android Parent POM</description>
     <url>https://github.com/GrioSF/GrioAndroidParentPOM</url>
