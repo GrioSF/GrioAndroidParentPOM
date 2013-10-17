@@ -7,7 +7,7 @@
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
     <name>Grio Android Parent POM</name>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 
     <description>Grio Android Parent POM</description>
     <url>https://github.com/GrioSF/GrioAndroidParentPOM</url>
@@ -62,8 +62,9 @@
         <main.basedir>${project.basedir}</main.basedir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <platform.version>17</platform.version>
-        <platform.level>17</platform.level>
+        <platform.version>4.3_r2</platform.version>
+        <android.annotations.version>22.2.1</android.annotations.version>
+        <platform.level>18</platform.level>
         
         <!-- JVM 1.6 is the default because there are some signing issues with 1.7 that haven't been resolved yet-->
         <jvm.version>1.6</jvm.version>
@@ -120,15 +121,15 @@
         <dependencies>
             <!--  Google Apis -->
             <dependency>
-                <groupId>com.google.android</groupId>
+                <groupId>android</groupId>
                 <artifactId>android</artifactId>
                 <version>${platform.version}</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
-                <groupId>com.google.android</groupId>
+                <groupId>com.google.android.annotations</groupId>
                 <artifactId>annotations</artifactId>
-                <version>${platform.version}</version>
+                <version>${android.annotations.version}</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
